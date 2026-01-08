@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<html lang="es">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Tablero DM — Integrado (FDS + ES en tablas)</title>
+<title>Tablero DM — Modular</title>
 <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
 <link href="./Tablero DM_files/css2" rel="stylesheet"/>
 <style>
@@ -132,9 +134,9 @@ textarea{min-height:120px;resize:vertical}
 .section-es .bloque tbody tr:last-child td {
   border-bottom: none;
 }
-.section-es .bloque.azul h3 {background:##3c7f8b;}
-.section-es .bloque.naranja h3 {background:##bf8702;}
-.section-es .bloque.vino h3 {background:##bf8702;}
+.section-es .bloque.azul h3 {background:#3c7f8b;}
+.section-es .bloque.naranja h3 {background:#bf8702;}
+.section-es .bloque.vino h3 {background:#bf8702;}
 
 /* Estilo para acomodadores */
 .section-es .tabla-mes {
@@ -192,630 +194,37 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 });
 </script>
+
 </head>
 <body>
-<div class="container">
-<h1>Congregación Diaz Mirón</h1>	
-<p class="sub">Infomación de la congregación Diaz Mirón</p>
-<div class="quick-grid" id="quickGrid">
-  <div class="card" data-target="fds"><div class="thumb"> <img alt="Fin de Semana" src="ICONOS/COLOR/Ico-RFS.svg"/></div><h3>Reunión de fin de semana</h3><p>Programa y acomodadores.</p></div>
-  <div class="card" data-target="es"><div class="thumb"> <img alt="Entre Semana" src="ICONOS/COLOR/Ico-RES.svg"/></div><h3>Reunión entre semana</h3><p>Programa y acoomodadores.</p></div>
-  <div class="card" data-target="acomodadores"><div class="thumb"><img alt="Entre Semana" src="ICONOS/COLOR/Ico-RES.svg"/></div><h3>Acomodadores</h3><p>Programa por mes.</p></div>
-  <div class="card" data-target="territorio"><div class="thumb"> <img alt="Territorio" src="ICONOS/COLOR/ICO-M.svg"/></div><h3>Territorio</h3><p>Mapas Díaz Mirón.</p></div>
-  <div class="card" data-target="anuncios"><div class="thumb"> <img alt="Anuncios" src="ICONOS/COLOR/ICO-A.svg"/></div><h3>Tablero de anuncios</h3><p>Próximos eventos.</p></div>
-  <div class="card" data-target="notocar"><div class="thumb"> <img src="ICONOS/COLOR/ICO-NT.svg" alt="NO Tocar" width="2"/></div><h3>NO TOCAR</h3><p>Direcciones del Territorio.</p></div>
+  <div class="container">
+    <h1>Congregación Diaz Mirón</h1>
+    <p class="sub">Infomación de la congregación Diaz Mirón</p>
+    <div class="quick-grid" id="quickGrid">
+<div class="card" data-target="fds"><div class="thumb"> <img alt="Fin de Semana" src="ICONOS/COLOR/Ico-RFS.svg"/></div><h3>Reunión de fin de semana</h3><p>Programa y acomodadores.</p></div>
+<div class="card" data-target="es"><div class="thumb"> <img alt="Entre Semana" src="ICONOS/COLOR/Ico-RES.svg"/></div><h3>Reunión entre semana</h3><p>Programa y acoomodadores.</p></div>
+<div class="card" data-target="acomodadores"><div class="thumb"><img alt="Entre Semana" src="ICONOS/COLOR/Ico-RES.svg"/></div><h3>Acomodadores</h3><p>Programa por mes.</p></div>
+<div class="card" data-target="territorio"><div class="thumb"> <img alt="Territorio" src="ICONOS/COLOR/ICO-M.svg"/></div><h3>Territorio</h3><p>Mapas Díaz Mirón.</p></div>
+<div class="card" data-target="anuncios"><div class="thumb"> <img alt="Anuncios" src="ICONOS/COLOR/ICO-A.svg"/></div><h3>Tablero de anuncios</h3><p>Próximos eventos.</p></div>
+<div class="card" data-target="notocar"><div class="thumb"> <img alt="NO Tocar" src="ICONOS/COLOR/ICO-NT.svg" width="2"/></div><h3>NO TOCAR</h3><p>Direcciones del Territorio.</p></div>
 </div>
 
-<div class="stage">
-<div class="view" data-view="fds">
-<h2>Reunión de fin de semana</h2>
-<div class="tag">Programa por mes</div>
-<div class="table-wrap">
-<table class="pretty">
-<thead><tr><th>Mes</th><th>Día</th><th>Presidente</th><th>Lector</th><th>Oración</th><th>Hospitalidad</th></tr></thead>
-<tbody>
-<tr><td>Octubre</td><td>5</td><td>Ricardo Cholico</td><td>Said Montaño</td><td>Saúl Jiménez</td><td>G.2</td></tr>
-<tr><td>Octubre</td><td>12</td><td>Andrey Durán</td><td>Rosendo Cholico</td><td>Rogelio García</td><td>G.3</td></tr>
-<tr><td>Octubre</td><td>19</td><td>Esteban Fernández</td><td>Rogelio García</td><td>Andrey Durán</td><td>G.4</td></tr>
-<tr><td>Octubre</td><td>26</td><td>Rogelio García</td><td>Pedro Jiménez</td><td>Ricardo Cholico</td><td>G.1</td></tr>
-<tr><td><strong>Noviembre</strong></td><td>2</td><td colspan="3">ASAMBLEA DE CIRCUITO</td><td></td></tr>
-<tr><td>Noviembre</td><td>9</td><td>Rosendo Cholico</td><td>—</td><td>Esteban Fernández</td><td>G.2</td></tr>
-<tr><td>Noviembre</td><td>16</td><td>Pedro Jiménez</td><td>Andrey Durán</td><td>Pedro Jiménez</td><td>G.3</td></tr>
-<tr><td>Noviembre</td><td>23</td><td>Saúl Montaño</td><td>Marco A. Martínez</td><td>Saúl Montaño</td><td>—</td></tr>
-<tr><td>Noviembre</td><td>30</td><td>José A. Hernández</td><td>Luis Téllez</td><td>Rosendo Cholico</td><td>G.4</td></tr>
-<tr><td><strong>Diciembre</strong></td><td>6</td><td>Ricardo Cholico</td><td>Eduardo Barrios</td><td>Andrey Durán</td><td>G.1</td></tr>
-<tr><td>Diciembre</td><td>13</td><td>Andrey Durán</td><td>Arturo Alvarado</td><td>Saúl Jiménez</td><td>G.2</td></tr>
-<tr><td>Diciembre</td><td>20</td><td>Esteban Fernández</td><td>Ricardo Cholico</td><td>Rogelio García</td><td>G.3</td></tr>
-<tr><td>Diciembre</td><td>27</td><td>Rogelio García</td><td>Said Montaño</td><td>Ricardo Cholico</td><td>G.4</td></tr>
-</tbody>
-</table>
-</div>
-</div>
-
-<div class="view section-es" data-view="es">
-  <h2>Reunión entre semana</h2>
-
-  <div class="tag">
-    JUEVES 04 DE DICIEMBRE<br>
-    PRESIDENTE Y ORACIÓN: Esteban Fernández<br>
-    Canción: 135<br>
-    ISAÍAS 3-5
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Tesoros de la Biblia</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>Jehová tenía derecho a esperar más de su pueblo (10 min.)</td><td>Pedro Jiménez</td></tr>
-        <tr><td>Busquemos perlas escondidas (10 min.)</td><td>Rogelio García</td></tr>
-        <tr><td>Lectura de la Biblia (4 min.) Is 5:1-12</td><td>Sebastián Vergara</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Seamos mejores maestros</th><th>Estudiante</th><th>Ayudante</th></tr></thead>
-      <tbody>
-        <tr><td>Empiece conversaciones (3 min.)</td><td>María De Torres</td><td>Silvia Espinosa</td></tr>
-        <tr><td>Haga revisitas (4 min.)</td><td>Jimena Lopez</td><td>Rocío Montaño</td></tr>
-        <tr><td>Haga discípulos (5 min.)</td><td>Rosario Cortés</td><td>Lizbeth Zamarripa</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Nuestra vida cristiana</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>Canción 65</td><td>—</td></tr>
-        <tr><td>Necesidades de la congregación (15 min.)</td><td>Esteban Fernández</td></tr>
-        <tr><td>Estudio bíblico de la congregación (30 min.)</td><td>Ricardo Cholico</td></tr>
-        <tr><td>Lector del estudio bíblico de la congregación</td><td>Said Montaño</td></tr>
-        <tr><td>Canción 4 · Palabras de conclusión (3 min.) · Oración: Ricardo Cholico</td><td>—</td></tr>
-      </tbody>
-    </table>
+    <div class="stage">
+  <div class="view" data-view="fds" data-src="blocks/reunion-fin-semana.html"></div>
+  <div class="view" data-view="es" data-src="blocks/reunion-entre-semana.html"></div>
+  <div class="view" data-view="acomodadores" data-src="blocks/acomodadores.html"></div>
+  <div class="view" data-view="territorio" data-src="blocks/territorio.html"></div>
+  <div class="view" data-view="anuncios" data-src="blocks/anuncios.html"></div>
+  <div class="view" data-view="notocar" data-src="blocks/no-tocar.html"></div>
+    </div>
   </div>
 
-  <div class="tag">
-    JUEVES 11 DE DICIEMBRE<br>
-    PRESIDENTE Y ORACIÓN: Pedro Jimenez<br>
-    Canción: 75<br>
-    ISAÍAS 6-8
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Tesoros de la Biblia</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>“Aquí estoy yo! ¡Envíame a mí!” (10 min.)</td><td>Rogelio García</td></tr>
-        <tr><td>Busquemos perlas escondidas (10 min.)</td><td>Andrey Durán</td></tr>
-        <tr><td>Lectura de la Biblia (4 min.) Is 8:1-13</td><td>José A. Hernández</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Seamos mejores maestros</th><th>Estudiante</th><th>Ayudante</th></tr></thead>
-      <tbody>
-        <tr><td>Empiece conversaciones (3 min.)</td><td>Mariana De Vielma</td><td>María De Razo</td></tr>
-        <tr><td>Haga revisitas (4 min.)</td><td>Fernanda Gonzalez</td><td>María De Santos</td></tr>
-        <tr><td>Haga revisitas (5 min.)</td><td>Gema De Ruiz</td><td>Elva Elías</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Nuestra vida cristiana</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>Canción 83</td><td>—</td></tr>
-        <tr><td>La predicación de casa en casa: nuestro sello distintivo (15 min.)</td><td>Pedro Jiménez</td></tr>
-        <tr><td>Estudio bíblico de la congregación (30 min.)</td><td>Esteban Fernández</td></tr>
-        <tr><td>Lector del estudio bíblico de la congregación</td><td>Ricardo Cholico</td></tr>
-        <tr><td>Canción 123 · Palabras de conclusión (3 min.) · Oración: Esteban Fernández</td><td>—</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="tag">
-    JUEVES 18 DE DICIEMBRE<br>
-    PRESIDENTE Y ORACIÓN: Rogelio Garcia<br>
-    Canción: 77<br>
-    ISAÍAS 9, 10
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Tesoros de la Biblia</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>Se profetizó “una gran luz” (10 min.)</td><td>Pedro Jiménez</td></tr>
-        <tr><td>Busquemos perlas escondidas (10 min.)</td><td>Ricardo Cholico</td></tr>
-        <tr><td>Lectura de la Biblia (4 min.) Is 10:1-14</td><td>Sebastián Tobar</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Seamos mejores maestros</th><th>Estudiante</th><th>Ayudante</th></tr></thead>
-      <tbody>
-        <tr><td>Empiece conversaciones (3 min.)</td><td>Susana Juan</td><td>Guadalupe De Lopez</td></tr>
-        <tr><td>Haga revisitas (4 min.)</td><td>Emiliano Sánchez</td><td>Esteban Fernández</td></tr>
-        <tr><td>Explique sus creencias (5 min.)</td><td>Gloria Resendiz</td><td>Violeta De Jimenez</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Nuestra vida cristiana</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>Canción 95</td><td>—</td></tr>
-        <tr><td>La luz brilla cada vez más (5 min.)</td><td>Esteban Fernández</td></tr>
-        <tr><td>Logros de la organización para el mes de diciembre (10 min.)</td><td>Rogelio García</td></tr>
-        <tr><td>Estudio bíblico de la congregación (30 min.)</td><td>Andrey Durán</td></tr>
-        <tr><td>Lector del estudio bíblico de la congregación</td><td>Luis Téllez</td></tr>
-        <tr><td>Canción 92 · Palabras de conclusión (3 min.) · Oración: Andrey Durán</td><td>—</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="tag">
-    JUEVES 25 DE DICIEMBRE<br>
-    PRESIDENTE Y ORACIÓN: Andrey Durán<br>
-    Canción: 14<br>
-    ISAÍAS 11-13
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Tesoros de la Biblia</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>¿Cómo sería el Mesías? (10 min.)</td><td>Esteban Fernández</td></tr>
-        <tr><td>Busquemos perlas escondidas (10 min.)</td><td>Said Montaño</td></tr>
-        <tr><td>Lectura de la Biblia (4 min.) Is 11:1-12</td><td>Marco Martínez</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Seamos mejores maestros</th><th>Estudiante</th><th>Ayudante</th></tr></thead>
-      <tbody>
-        <tr><td>Empiece conversaciones (3 min.)</td><td>Soledad Ramirez</td><td>Azucena De Jimenez</td></tr>
-        <tr><td>Haga revisitas (4 min.)</td><td>Saul Jimenez</td><td>Gabino Rivas</td></tr>
-        <tr><td>Haga discípulos (5 min.)</td><td>Valeria Lopez</td><td>Sharon García</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Nuestra vida cristiana</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>Canción 57</td><td>—</td></tr>
-        <tr><td>¿Somos justos cuando juzgamos? (15 min.)</td><td>Rogelio García</td></tr>
-        <tr><td>Estudio bíblico de la congregación (30 min.)</td><td>Pedro Jiménez</td></tr>
-        <tr><td>Lector del estudio bíblico de la congregación</td><td>Eduardo Barrios</td></tr>
-        <tr><td>Canción 12 · Palabras de conclusión (3 min.) · Oración: Pedro Jiménez</td><td>—</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="tag">
-    JUEVES 01 DE ENERO<br>
-    PRESIDENTE Y ORACIÓN: Esteban Fernández<br>
-    Canción: 63<br>
-    ISAÍAS 14-16
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Tesoros de la Biblia</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>Los enemigos del pueblo de Dios no se quedan sin castigo (10 min.)</td><td>Pedro Jiménez</td></tr>
-        <tr><td>Busquemos perlas escondidas (10 min.)</td><td>Rogelio García</td></tr>
-        <tr><td>Lectura de la Biblia (4 min.) Is 16:1-14</td><td>Obet Meza</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Seamos mejores maestros</th><th>Estudiante</th><th>Ayudante</th></tr></thead>
-      <tbody>
-        <tr><td>Empiece conversaciones (3 min.)</td><td>Karen Franco</td><td>Karla Téllez</td></tr>
-        <tr><td>Haga revisitas (4 min.)</td><td>Pedro Jiménez</td><td>Rosendo Cholico</td></tr>
-        <tr><td>Discurso (5 min.)</td><td>Jorge Sebastian</td><td>—</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Nuestra vida cristiana</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>Canción 2</td><td>—</td></tr>
-        <tr><td>Necesidades de la congregación (15 min.)</td><td>Esteban Fernández</td></tr>
-        <tr><td>Estudio bíblico de la congregación (30 min.)</td><td>Andrey Durán</td></tr>
-        <tr><td>Lector del estudio bíblico de la congregación</td><td>Arturo Alvarado</td></tr>
-        <tr><td>Canción 21 · Palabras de conclusión (3 min.) · Oración: Andrey Durán</td><td>—</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="tag">
-    JUEVES 08 DE ENERO<br>
-    PRESIDENTE Y ORACIÓN: Pedro Jiménez<br>
-    Canción: 153<br>
-    ISAÍAS 17-20
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Tesoros de la Biblia</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>“Lo que van a recibir quienes nos despojan” (10 min.)</td><td>Rogelio García</td></tr>
-        <tr><td>Busquemos perlas escondidas (10 min.)</td><td>Andrey Duran</td></tr>
-        <tr><td>Lectura de la Biblia (4 min.)</td><td>Yordi Vielma</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Seamos mejores maestros</th><th>Estudiante</th><th>Ayudante</th></tr></thead>
-      <tbody>
-        <tr><td>Empiece conversaciones (3 mins.)</td><td>Ana Aleman</td><td>Beatriz Medina</td></tr>
-        <tr><td>Haga revisitas (4 mins.)</td><td>Camila Almeraya</td><td>Barbara De Tovar</td></tr>
-        <tr><td>Discurso (5 mins.)</td><td>Jose A. Hernández</td><td>—</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Nuestra vida cristiana</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>Canción 148</td><td>—</td></tr>
-        <tr><td>Acuérdate de “la Roca de tu fortaleza”</td><td>Ricardo Cholico</td></tr>
-        <tr><td>Esforcémonos por aprender de los amigos de Jehová todos los días</td><td>Said Montaño</td></tr>
-        <tr><td>Estudio bíblico de la congregación</td><td>Esteban Fernández</td></tr>
-        <tr><td>Lector del estudio bíblico</td><td>Marco Martínez</td></tr>
-        <tr><td>Canción 73 · Palabras de conclusión · Oración: Esteban Fernández</td><td>—</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="tag">
-    JUEVES 15 DE ENERO<br>
-    PRESIDENTE Y ORACIÓN: Rogelio García<br>
-    Canción: 120<br>
-    ISAÍAS 21-23
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Tesoros de la Biblia</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>Qué aprendemos de lo que le pasó a Sebná (10 min.)</td><td>Pedro Jiménez</td></tr>
-        <tr><td>Busquemos perlas escondidas (10 min.)</td><td>Esteban Fernández</td></tr>
-        <tr><td>Lectura de la Biblia (4 min.)</td><td>Alonso Munive</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Seamos mejores maestros</th><th>Estudiante</th><th>Ayudante</th></tr></thead>
-      <tbody>
-        <tr><td>Empiece conversaciones (1 min.)</td><td>Hermelinda Aguilar</td><td>Iliana De Montaño</td></tr>
-        <tr><td>Empiece conversaciones (3 mins.)</td><td>Valeria Almeraya</td><td>Rocío De Rivas</td></tr>
-        <tr><td>Haga revisitas (2 mins.)</td><td>Verónica De Tellez</td><td>Rosalinda Martínez</td></tr>
-        <tr><td>Discurso (5 mins.)</td><td>Obed Meza</td><td>—</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Nuestra vida cristiana</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>Canción 124</td><td>—</td></tr>
-        <tr><td>Necesidades de la congregación</td><td>Rogelio García</td></tr>
-        <tr><td>Estudio bíblico de la congregación</td><td>Andrey Duran</td></tr>
-        <tr><td>Lector del estudio bíblico</td><td>Sebastián Vergara</td></tr>
-        <tr><td>Canción 3 · Palabras de conclusión · Oración: Andrey Duran</td><td>—</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="tag">
-    JUEVES 22 DE ENERO<br>
-    PRESIDENTE Y ORACIÓN: Andrey Duran<br>
-    Canción: 159<br>
-    ISAÍAS 24-27
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Tesoros de la Biblia</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>“¡Este es nuestro Dios!” (10 min.)</td><td>Esteban Fernández</td></tr>
-        <tr><td>Busquemos perlas escondidas (10 min.)</td><td>Jose A. Hernández</td></tr>
-        <tr><td>Lectura de la Biblia (4 min.)</td><td>Luis Tellez</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Seamos mejores maestros</th><th>Estudiante</th><th>Ayudante</th></tr></thead>
-      <tbody>
-        <tr><td>Empiece conversaciones (3 mins.)</td><td>Violeta De Jiménez</td><td>Roma Alvarado</td></tr>
-        <tr><td>Haga revisitas (4 mins.)</td><td>Miriam García</td><td>Ruth De García</td></tr>
-        <tr><td>Explique sus creencias (5 mins.)</td><td>Andrey Duran</td><td>Marco Martínez</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Nuestra vida cristiana</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>Canción 144</td><td>—</td></tr>
-        <tr><td>Apoyémonos en Jehová y preparémonos para cuando necesitemos atención médica</td><td>Pedro Jiménez</td></tr>
-        <tr><td>Estudio bíblico de la congregación</td><td>Rogelio García</td></tr>
-        <tr><td>Lector del estudio bíblico</td><td>Andrey Duran</td></tr>
-        <tr><td>Canción 53 · Palabras de conclusión · Oración: Rogelio García</td><td>—</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="tag">
-    JUEVES 29 DE ENERO<br>
-    PRESIDENTE Y ORACIÓN: Esteban Fernández<br>
-    Canción: 28<br>
-    ISAÍAS 28, 29
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Tesoros de la Biblia</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>No honremos a Jehová solo de labios para afuera (10 min.)</td><td>Rosendo Cholico</td></tr>
-        <tr><td>Busquemos perlas escondidas (10 min.)</td><td>Said Montaño</td></tr>
-        <tr><td>Lectura de la Biblia (4 min.)</td><td>Alejandro Ramirez</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Seamos mejores maestros</th><th>Estudiante</th><th>Ayudante</th></tr></thead>
-      <tbody>
-        <tr><td>Empiece conversaciones (2 mins.)</td><td>Berenice De Andrade</td><td>Jazmín Perez</td></tr>
-        <tr><td>Haga revisitas (3 mins.)</td><td>Vania Padilla</td><td>Deyanira España</td></tr>
-        <tr><td>Haga discípulos (2 mins.)</td><td>Piedad Molina</td><td>Epifanía García</td></tr>
-        <tr><td>Haga discípulos (4 mins.)</td><td>Beatriz De Cholico</td><td>Anahi De Hernández</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Nuestra vida cristiana</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>Canción 89</td><td>—</td></tr>
-        <tr><td>“Yo siempre hago lo que a él le agrada”</td><td>Pedro Jiménez</td></tr>
-        <tr><td>Necesidades de la congregación</td><td>Esteban Fernández</td></tr>
-        <tr><td>Estudio bíblico de la congregación</td><td>Andrey Duran</td></tr>
-        <tr><td>Lector del estudio bíblico</td><td>Pedro Jiménez</td></tr>
-        <tr><td>Canción 55 · Palabras de conclusión · Oración: Andrey Duran</td><td>—</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="tag">
-    JUEVES 05 DE FEBRERO<br>
-    PRESIDENTE Y ORACIÓN: Pedro Jiménez<br>
-    Canción: 08<br>
-    ISAÍAS 30-32
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Tesoros de la Biblia</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>Busquemos refugio bajo las alas de Jehová (10 min.)</td><td>Andrey Duran</td></tr>
-        <tr><td>Busquemos perlas escondidas (10 min.)</td><td>Ricardo Cholico</td></tr>
-        <tr><td>Lectura de la Biblia (4 min.)</td><td>Angel Sanchez</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Seamos mejores maestros</th><th>Estudiante</th><th>Ayudante</th></tr></thead>
-      <tbody>
-        <tr><td>Empiece conversaciones (4 mins.)</td><td>Josefina Trujillo</td><td>Juanita De Campos</td></tr>
-        <tr><td>Empiece conversaciones (4 mins.)</td><td>Jael Vazquez</td><td>Teodora Guijada</td></tr>
-        <tr><td>Haga revisitas (4 mins.)</td><td>Amanda De Arreola</td><td>Hodalis De Martínez</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Nuestra vida cristiana</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>Canción 157</td><td>—</td></tr>
-        <tr><td>“El resultado de la verdadera rectitud será paz” (fragmento)</td><td>Rogelio García</td></tr>
-        <tr><td>Estudio bíblico de la congregación</td><td>Esteban Fernández</td></tr>
-        <tr><td>Lector del estudio bíblico</td><td>Yordi Vielma</td></tr>
-        <tr><td>Canción 133 · Palabras de conclusión · Oración: Esteban Fernández</td><td>—</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="tag">
-    JUEVES 12 DE FEBRERO<br>
-    PRESIDENTE Y ORACIÓN: Rogelio García<br>
-    Canción: 03<br>
-    ISAÍAS 33-35
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Tesoros de la Biblia</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>“Él es la estabilidad de tus tiempos” (10 min.)</td><td>Pedro Jiménez</td></tr>
-        <tr><td>Busquemos perlas escondidas (10 min.)</td><td>Esteban Fernández</td></tr>
-        <tr><td>Lectura de la Biblia (4 min.)</td><td>Arturo Alvarado</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Seamos mejores maestros</th><th>Estudiante</th><th>Ayudante</th></tr></thead>
-      <tbody>
-        <tr><td>Empiece conversaciones (3 mins.)</td><td>Ricardo Cholico</td><td>Eduardo Barrios</td></tr>
-        <tr><td>Haga revisitas (4 mins.)</td><td>Daniela García</td><td>Teresa Lopez</td></tr>
-        <tr><td>Discurso (5 mins.)</td><td>Marco Martínez</td><td>—</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Nuestra vida cristiana</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>Canción 41</td><td>—</td></tr>
-        <tr><td>Necesidades de la congregación</td><td>Rogelio García</td></tr>
-        <tr><td>Estudio bíblico de la congregación</td><td>Andrey Duran</td></tr>
-        <tr><td>Lector del estudio bíblico</td><td>Rosendo Cholico</td></tr>
-        <tr><td>Canción 23 · Palabras de conclusión · Oración: Andrey Duran</td><td>—</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="tag">
-    JUEVES 26 DE FEBRERO<br>
-    PRESIDENTE Y ORACIÓN: Esteban Fernández<br>
-    Canción: 04<br>
-    ISAÍAS 38-40
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Tesoros de la Biblia</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>“Cuidará de su rebaño como un pastor” (10 min.)</td><td>Rogelio García</td></tr>
-        <tr><td>Busquemos perlas escondidas (10 min.)</td><td>Jose A. Hernández</td></tr>
-        <tr><td>Lectura de la Biblia (4 min.)</td><td>Eduardo Barrios</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Seamos mejores maestros</th><th>Estudiante</th><th>Ayudante</th></tr></thead>
-      <tbody>
-        <tr><td>Empiece conversaciones (2 mins.)</td><td>Amalia Martínez</td><td>Jimena Lopez</td></tr>
-        <tr><td>Empiece conversaciones (2 mins.)</td><td>Azucena De Jiménez</td><td>Gabriela Guzmán</td></tr>
-        <tr><td>Haga revisitas (2 mins.)</td><td>Guadalupe De Lopez</td><td>Alicia Celis</td></tr>
-        <tr><td>Haga discípulos (5 mins.)</td><td>Rogelio García</td><td>Yordi Vielma</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-wrap">
-    <table class="pretty">
-      <thead><tr><th>Nuestra vida cristiana</th><th>Asignado</th></tr></thead>
-      <tbody>
-        <tr><td>Canción 160</td><td>—</td></tr>
-        <tr><td>Informe de servicio anual</td><td>Andrey Duran</td></tr>
-        <tr><td>Estudio bíblico de la congregación</td><td>Pedro Jiménez</td></tr>
-        <tr><td>Lector del estudio bíblico</td><td>Ricardo Cholico</td></tr>
-        <tr><td>Canción 161 · Palabras de conclusión · Oración: Pedro Jiménez</td><td>—</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-</div>
-
-<div class="view" data-view="territorio">
-<h2>Territorio — Díaz Mirón</h2>
-<div class="territorio-wrap">
-<img alt="Mapa general" src="./Tablero DM_files/Territorio1.png"/>
-<img alt="Sector 3x / 33x" src="./Tablero DM_files/Territorio2.png"/>
-</div>
-</div>
-
-<div class="view" data-view="anuncios">
-<h2>Tablero de anuncios</h2>
-<div class="anuncios" id="anunciosList"></div>
-</div>
-
-<div class="view active" data-view="notocar">
-<h2>Direcciones «No Tocar» — Vista simple</h2>
-<p class="sub">Por favor, reporta cualquier incidente en la predicación.</p>
-<div class="actions" style="display:flex; justify-content:flex-start; margin-bottom:12px;">
-  <button class="btn" id="openReport">Reportar nuevo incidente</button>
-</div>
-
-<div class="table-wrap">
-<table class="pretty">
-<thead><tr><th>Territorio</th><th>Calle / Depto.</th><th>Letra</th><th>Detalles</th><th>Número</th><th>Estado</th><th>Descripción evento</th><th>Responsable</th><th>Última revisión</th></tr></thead>
-<tbody id="noTocarBody">
-<tr><td>2</td><td>Seminario</td><td>A</td><td>Casa a media escalera.</td><td>1</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>2</td><td>Seminario</td><td>C</td><td>Casa verde a media escalera con un “9 3/4” en la puerta.</td><td>2</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>4</td><td>1a entrada</td><td>B</td><td>Casita de madera en la primera entrada del predio.</td><td>33</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>5</td><td>Entrada 15-17</td><td></td><td>Escalera de la entrada. Torres Quiroga.</td><td>201</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>5</td><td>Entrada 23</td><td></td><td>Entrada al lado del estacionamiento. Escalera del fondo. Torres Quiroga.</td><td>409</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>5</td><td>Entrada 23</td><td></td><td>Entrada al lado del estacionamiento. Escalera del fondo. Torres Quiroga.</td><td>411</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>6</td><td>Entrada 9-11</td><td></td><td>Escalera del fondo. Torres Quiroga.</td><td>11</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>7</td><td>Entrada 1-3</td><td></td><td>Escalera del fondo. Torres Quiroga.</td><td>111</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>7</td><td>Entrada 5-7</td><td></td><td>Escalera del fondo. Torres Quiroga.</td><td>11</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>7</td><td>Entrada 5-7</td><td></td><td>Escalera de la entrada. Torres Quiroga.</td><td>304</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>8</td><td>Oriente 157</td><td>D</td><td>Casa con puerta de madera.</td><td>3816</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>8</td><td>Norte 74</td><td>F</td><td>Casa color vino con portón blanco.</td><td>8011</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>9</td><td>Norte 72-B</td><td>C</td><td>Casa con puerta y portón negros.</td><td>8106</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>9</td><td>Oriente 157</td><td>F</td><td>Casa esquina Norte 72a. Casa verde con letrero de renta de autobuses.</td><td>3712</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>9</td><td>Norte 72</td><td>H</td><td>Casa color lila con portón negro y puerta de reja negra con tres troneras.</td><td>s/n</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>10</td><td>Oriente 159</td><td>G</td><td>Casa blanca con puerta negra.</td><td>3320</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>11</td><td>Norte 64-A</td><td>C</td><td>Casa naranja con puerta de madera.</td><td>7810</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>11</td><td>Norte 64-A</td><td>E</td><td>Casa color lila y portón blanco con ventanas de aluminio color oro.</td><td>7827</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>11</td><td>Oriente 155</td><td>F</td><td>Casa verde con letrero de “Natura”.</td><td>3316</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>11</td><td>Oriente 155</td><td>F</td><td>Casa verde con puertas blancas.</td><td>3324</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>11</td><td>Oriente 153</td><td>G</td><td>Casa color rojo con tejado en el portón, junto a las oficinas de la dirección distrital 04.</td><td>3404</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>12</td><td>Oriente 155</td><td>A</td><td>Casa de cemento con portón color cobre.</td><td>3404</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>12</td><td>Oriente 153</td><td>C</td><td>Casa amarilla en la esquina Norte 68.</td><td>3502</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>12</td><td>Norte 68</td><td>C</td><td>Casa blanca con cortina y portón blanco, con un pino enfrente, a lado de casa anaranjada.</td><td>7827</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>13</td><td>Norte 72</td><td>B</td><td>Casa rosa con portón café.</td><td>7810</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>14</td><td>Norte 74</td><td>A</td><td>Casa azul con portón blanco.</td><td>7807</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>14</td><td>Norte 74</td><td>A</td><td>Casa color café con azulejos pequeños café y verde, con portón blanco.</td><td>7821</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>14</td><td>Oriente 155</td><td>B</td><td>Casa gris, pared con acabado Tirol rústico, portón negro.</td><td>3804</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>14</td><td>Norte 74</td><td>B</td><td>*Probable 7913.* Casa amarillo ámbar con paredes deterioradas y portón blanco.</td><td>7913*</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>14</td><td>Norte 74-A</td><td>C</td><td>Casa blanca con portón café y adornos de alcatraz.</td><td>7805</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>15</td><td>Norte 76</td><td>A</td><td>Casa azul cielo con puerta blanca.</td><td>7727</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>15</td><td>Norte 76</td><td>B</td><td>Casa blanca de 2 pisos con farolas y portón oscuro.</td><td>7730</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>16</td><td>Gregorio Pairo</td><td>D</td><td>Casa esquina Félix Romero. Casa verde olivo con tienda de abarrotes.</td><td>15</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>17</td><td>Gabino Ortiz</td><td>A</td><td>Casa esquina Francisco Díaz. Casa color pistache y verde oscuro, portón blanco en la esquina.</td><td>14</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>20</td><td>Depto. 14</td><td></td><td>Unidad DM Nacional.</td><td>404</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>30</td><td>Valentín Canalizo</td><td>C</td><td>Casa blanca.</td><td>71</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>31</td><td>Calle sexta</td><td>B</td><td>Casa verde turquesa.</td><td>29</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>31</td><td>Artes</td><td>H</td><td>Casa de 2 pisos, mosaico café en la parte de abajo y durazno arriba. Portón negro.</td><td>s/n</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>31</td><td>Calle séptima</td><td>H</td><td>Casa anaranjada con rojo.</td><td>15</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>31</td><td>Calle novena</td><td>F</td><td>Casa blanca con portón negro.</td><td>14</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>32</td><td>Capilla</td><td>A</td><td>Casa azul cielo con puerta verde.</td><td>s/n</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-</tbody>
-</table>
-</div>
-<div class="actions">
-<button class="btn" id="openReport2">Reportar nuevo incidente</button>
-</div>
-</div>
-<div class="view" data-view="acomodadores"><h2>Acomodadores</h2><div class="tag">Jueves y Sábados — Por mes</div><div class="table-wrap"><table class="pretty">
-<thead style="background:#f59e0b;color:#fff;font-weight:700;text-align:left;">
-<tr><th colspan="4" style="font-size:16px;">Octubre</th></tr>
-<tr><th>Fecha</th><th>Entrada</th><th>Auditorio</th><th>Extra</th></tr>
-</thead>
-<tbody>
-<tr><td>Jueves 2</td><td>Esteban Fernández</td><td>Rogelio García</td><td>Eduardo Barrios</td></tr>
-<tr><td>Jueves 9</td><td>Ricardo Cholico</td><td>Angel Sanchez</td><td>Jose A. Hernández</td></tr>
-<tr><td>Jueves 16</td><td>Andrey Durán</td><td>Jose A. Hernández</td><td>Jordy Vielma</td></tr>
-<tr><td>Jueves 23</td><td>Said Montaño</td><td>Arturo Alvarado</td><td>Marco A. Martínez</td></tr>
-<tr><td>Jueves 30</td><td>Saul Jiménez</td><td>Rogelio García</td><td>Gabino Rivas</td></tr>
-</tbody>
-</table></div><div class="table-wrap"><table class="pretty">
-<thead style="background:#9ca3af;color:#fff;font-weight:700;text-align:left;">
-<tr><th colspan="4" style="font-size:16px;">Noviembre</th></tr>
-<tr><th>Fecha</th><th>Entrada</th><th>Auditorio</th><th>Extra</th></tr>
-</thead>
-<tbody>
-<tr><td>Sábado 2</td><td colspan="3" style="text-align:center;font-style:italic;letter-spacing:2px;">ASAMBLEA DE CIRCUITO</td></tr>
-<tr><td>Jueves 6</td><td>Rogelio García</td><td>Esteban Fernández</td><td>Said Montaño</td></tr>
-<tr><td>Jueves 13</td><td>Pedro Jiménez</td><td>Eduardo Barrios</td><td>Luis Tellez</td></tr>
-<tr><td>Jueves 20</td><td>Rosendo Cholico</td><td>Arturo Alvarado</td><td>Jose A. Hernández</td></tr>
-<tr><td>Jueves 27</td><td>Saul Jiménez</td><td>Gabino Rivas</td><td>Said Montaño</td></tr>
-</tbody>
-</table></div><div class="table-wrap"><table class="pretty"><thead style="background:#16a34a;color:#fff;font-weight:700;text-align:left;"><tr><th colspan="4" style="font-size:16px;">Diciembre</th></tr><tr><th>Fecha</th><th>Entrada</th><th>Auditorio</th><th>Extra</th></tr></thead><tbody><tr><td>Jueves 4</td><td>Ricardo Cholico</td><td>Marco A. Martínez</td><td>Pedro Jiménez</td></tr><tr><td>Jueves 11</td><td>Andrey Durán</td><td>Esteban Fernández</td><td>Rogelio García</td></tr><tr><td>Jueves 18</td><td>Rogelio García</td><td>Ángel Sánchez</td><td>Saúl Jiménez</td></tr></tbody></table></div><div style="height:16px"></div><div class="tag">Sábados — Por mes</div></div></div>
-</div>
-<div class="backdrop" id="backdrop">
+  <div class="backdrop" id="backdrop">
 <div class="modal">
 <h3>Reportar “No Tocar”</h3>
 <p class="small">Completa los campos. Al enviar, se abrirá un correo listo para mandar a <strong>live24a@gmail.com</strong>.</p>
 <form id="reportForm">
-  <input type="text" name="hp" id="hp" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;">
-
+<input aria-hidden="true" autocomplete="off" id="hp" name="hp" style="position:absolute;left:-9999px;opacity:0;" tabindex="-1" type="text"/>
 <div class="row">
 <div><label>Territorio</label><input name="territorio" required=""/></div>
 <div><label>Calle / Depto.</label><input name="calle" required=""/></div>
@@ -833,102 +242,149 @@ document.addEventListener('DOMContentLoaded', function(){
 </form>
 </div>
 </div>
+
+  
 <script>
-(function(){
-  function show(view){
-    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+(() => {
+  const quickGrid = document.getElementById('quickGrid');
+
+  function setActive(view){
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     const sec = document.querySelector('.view[data-view="'+view+'"]');
-    if(sec){ sec.classList.add('active'); }
+    if (!sec) return;
+    sec.classList.add('active');
+  }
+
+  async function loadView(view){
+    const sec = document.querySelector('.view[data-view="'+view+'"]');
+    if (!sec) return;
+    if (sec.dataset.loaded === '1') return;
+
+    const src = sec.dataset.src;
+    if (!src) return;
+
+    sec.innerHTML = '<p class="sub">Cargando…</p>';
+
+    const res = await fetch(src, { cache: 'no-cache' });
+    if (!res.ok) throw new Error('No se pudo cargar '+src);
+
+    sec.innerHTML = await res.text();
+    sec.dataset.loaded = '1';
+
+    // hooks por bloque
+    if (view === 'es') applyEntreSemanaHeaderColors();
+  }
+
+  function show(view){
+    setActive(view);
+    loadView(view).catch(err => {
+      const sec = document.querySelector('.view[data-view="'+view+'"]');
+      if (sec) sec.innerHTML = '<p class="sub">Error: '+(err?.message || 'No se pudo cargar el bloque')+'</p>';
+    });
     location.hash = view;
   }
-  document.getElementById('quickGrid').addEventListener('click', (e)=>{
-    const card = e.target.closest('.card[data-target]'); if(!card) return;
-    show(card.getAttribute('data-target'));
-  });
-  show((location.hash||'').replace('#','') || 'fds');
 
-  // Anuncios (texto)
-  const anuncios = [
-    {fecha:'sáb, 1 nov 2025', titulo:'Asamblea de circuito con el representante de la sucursal'},
-    {fecha:'dom, 22 feb 2026', titulo:'Asamblea de circuito con el superintendente de circuito'},
-    {fecha:'jue, 2 abr 2026', titulo:'Conmemoración', destacado:true},
-  ];
-  const list = document.getElementById('anunciosList');
-  anuncios.forEach(a=>{
-    const el = document.createElement('div');
-    el.className = 'item';
-    if(a.destacado){ el.style.background='#eef5ff'; }
-    el.innerHTML = '<div class="fecha">'+a.fecha+'</div><div class="titulo">'+a.titulo+'</div>';
-    list.appendChild(el);
+  // Click en tarjetas
+  if (quickGrid){
+    quickGrid.addEventListener('click', (e) => {
+      const card = e.target.closest('.card[data-target]');
+      if (!card) return;
+      show(card.getAttribute('data-target'));
+    });
+  }
+
+  // Arranque
+  const initial = (location.hash || '').replace('#','') || 'fds';
+  show(initial);
+
+  // Mantén el hash navegable (atrás/adelante)
+  window.addEventListener('hashchange', () => {
+    const view = (location.hash || '').replace('#','') || 'fds';
+    show(view);
   });
 
-  // Modal
+  // ====== Modal “No Tocar” (event delegation para soportar carga dinámica) ======
   const bd = document.getElementById('backdrop');
-  // CORRECCIÓN 3: Actualizamos el script para escuchar AMBOS botones
-  const openBtns = document.querySelectorAll('#openReport, #openReport2');
-  openBtns.forEach(btn => {
-    btn.onclick = () => bd.style.display='flex';
+  document.addEventListener('click', (e) => {
+    if (!bd) return;
+
+    const openBtn = e.target.closest('#openReport, #openReport2, [data-action="open-report"]');
+    if (openBtn) {
+      bd.style.display = 'flex';
+      return;
+    }
+
+    const cancelBtn = e.target.closest('#cancel, [data-action="close-report"]');
+    if (cancelBtn) {
+      bd.style.display = 'none';
+      return;
+    }
+
+    // clic fuera del modal = cerrar
+    if (e.target === bd) {
+      bd.style.display = 'none';
+    }
   });
 
-  const cancelBtn = document.getElementById('cancel'); if(cancelBtn) cancelBtn.onclick = ()=> bd.style.display='none';
-
-  // Envío con EmailJS (con fallback a mailto)
+  // ====== Envío con EmailJS (con fallback a mailto) ======
   const form = document.getElementById('reportForm');
-  if(form){
-    // cache UI
+  if (form) {
     const submitBtn = form.querySelector('button[type="submit"]');
     const originalText = submitBtn ? submitBtn.textContent : null;
 
-    form.addEventListener('submit', async (e)=>{
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const fd = new FormData(e.target);
 
       // Honeypot: si está relleno, no enviamos
-      if ((fd.get('hp')||'').trim() !== '') {
+      if ((fd.get('hp') || '').trim() !== '') {
         console.warn('Honeypot activado — envío cancelado');
         return;
       }
 
       // UI: bloquea durante el envío
-      if(submitBtn){ submitBtn.disabled = true; submitBtn.textContent = 'Enviando…'; }
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Enviando…'; }
 
       const to = 'live24a@gmail.com';
-      const subject = 'Reporte NO TOCAR — Territorio ' + (fd.get('territorio')||'');
+      const subject = 'Reporte NO TOCAR — Territorio ' + (fd.get('territorio') || '');
       const bodyLines = [
-        'Territorio: ' + (fd.get('territorio')||''),
-        'Calle / Depto.: ' + (fd.get('calle')||''),
-        'Número: ' + (fd.get('numero')||''),
-        'Detalles: ' + (fd.get('detalles')||''),
-        'Reportado por: ' + (fd.get('responsable')||'')
+        'Territorio: ' + (fd.get('territorio') || ''),
+        'Calle / Depto.: ' + (fd.get('calle') || ''),
+        'Número: ' + (fd.get('numero') || ''),
+        'Detalles: ' + (fd.get('detalles') || ''),
+        'Reportado por: ' + (fd.get('responsable') || '')
       ];
       const body = bodyLines.join('\n');
 
-      // Parámetros para EmailJS
       const templateParams = {
         to_email: to,
         subject: subject,
         cuerpo: body,
-        territorio: fd.get('territorio')||'',
-        calle: fd.get('calle')||'',
-        numero: fd.get('numero')||'',
-        detalles: fd.get('detalles')||'',
-        responsable: fd.get('responsable')||''
+        territorio: fd.get('territorio') || '',
+        calle: fd.get('calle') || '',
+        numero: fd.get('numero') || '',
+        detalles: fd.get('detalles') || '',
+        responsable: fd.get('responsable') || ''
       };
 
-      // ¿Está listo EmailJS?
       const emailjsReady = (typeof emailjs !== 'undefined')
+        && typeof EMAILJS_PUBLIC_KEY !== 'undefined'
+        && typeof EMAILJS_SERVICE_ID !== 'undefined'
+        && typeof EMAILJS_TEMPLATE_ID !== 'undefined'
         && EMAILJS_PUBLIC_KEY
         && EMAILJS_SERVICE_ID
         && EMAILJS_TEMPLATE_ID
-        && !EMAILJS_PUBLIC_KEY.includes('PASTE_');
+        && !String(EMAILJS_PUBLIC_KEY).includes('PASTE_');
 
       async function fallbackMailto(){
-        const href = 'mailto:'+to+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+        const href = 'mailto:' + to
+          + '?subject=' + encodeURIComponent(subject)
+          + '&body=' + encodeURIComponent(body);
         window.location.href = href;
       }
 
-      try{
-        if(emailjsReady){
+      try {
+        if (emailjsReady) {
           const res = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
           console.log('EmailJS OK', res);
           alert('¡Reporte enviado! Gracias por la información.');
@@ -936,117 +392,44 @@ document.addEventListener('DOMContentLoaded', function(){
           console.warn('EmailJS no configurado — usando mailto como respaldo.');
           await fallbackMailto();
         }
-        // Cierra modal y resetea form
+
         e.target.reset();
         const bd = document.getElementById('backdrop');
-        if(bd){ bd.style.display='none'; }
-      } catch(err){
+        if (bd) bd.style.display = 'none';
+      } catch (err) {
         console.error('Error enviando con EmailJS:', err);
         alert('No se pudo enviar por EmailJS. Intentaremos con tu app de correo.');
         await fallbackMailto();
       } finally {
-        if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = originalText || 'Enviar por correo'; }
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalText || 'Enviar por correo'; }
       }
     });
   }
 
-  // Export CSV de la tabla actual de No Tocar
-  const dl = document.getElementById('downloadCsv');
-  if(dl){
-    dl.onclick = ()=>{
-      const rows = Array.from(document.querySelectorAll('[data-view="notocar"] tbody tr')).map(tr =>
-        Array.from(tr.children).map(td => (td.textContent||'').replace(/\\n+/g,' ').trim()).join(','));
-      const header = 'Territorio,Calle / Depto.,Letra,Detalles,Número,Estado,Descripción evento,Responsable,Última revisión';
-      const csv = [header, ...rows].join('\\n');
-      const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'NO_TOCAR_export.csv'; a.click();
-      URL.revokeObjectURL(url);
-    };
+  // ====== Colores “Reunión entre semana” ======
+  function applyEntreSemanaHeaderColors(){
+    document.querySelectorAll('.section-es thead').forEach(thead => {
+      const firstTh = thead.querySelector('th:first-child');
+      if (!firstTh) return;
+
+      const text = (firstTh.textContent || '').trim().toLowerCase();
+      let color = '';
+
+      if (text.includes('tesoros de la biblia')) color = '#3c7f8b';
+      else if (text.includes('seamos mejores maestros')) color = '#bf8702';
+      else if (text.includes('nuestra vida cristiana')) color = '#7c0125';
+
+      if (color) {
+        thead.querySelectorAll('th').forEach(th => {
+          th.style.background = color;
+          th.style.color = '#fff';
+          th.style.border = 'none';
+        });
+      }
+    });
   }
 })();
 </script>
-<script>
-// === COLORES PERSONALIZADOS PARA REUNIÓN ENTRE SEMANA ===
-document.querySelectorAll('.section-es thead').forEach(thead => {
-  const firstTh = thead.querySelector('th:first-child');
-  if (!firstTh) return;
 
-  const text = firstTh.textContent.trim().toLowerCase();
-  let color = '';
-
-  // Actualizados a tu pedido:
-  // Tesoros de la Biblia -> #3c7f8b
-  // Seamos mejores maestros -> #bf8702
-  // Nuestra vida cristiana -> #7c0125
-
-  if (text.includes('tesoros de la biblia')) color = '#3c7f8b';
-  else if (text.includes('seamos mejores maestros')) color = '#bf8702';
-  else if (text.includes('nuestra vida cristiana')) color = '#7c0125';
-
-  if (color) {
-    thead.querySelectorAll('th').forEach(th => {
-      th.style.background = color;
-      th.style.color = '#fff';
-      th.style.border = 'none'; // opcional, quita bordes para que se vea más limpio
-    });
-  }
-});
-
-// Colores para los meses de los acomodadores (encabezado)
-document.querySelectorAll('thead tr th[colspan]').forEach(th => {
-  const text = th.textContent.trim();
-  let color = '';
-  if (text.includes('Octubre')) color = '#f59e0b';
-  else if (text.includes('Noviembre')) color = '#9ca3af';
-  else if (text.includes('Diciembre')) color = '#16a34a';
-
-  if (color) {
-    th.style.background = color;
-    th.style.color = '#fff';
-  }
-});
-
-// Colores para los acomodadores SÁBADOS (filas alternas)
-document.querySelectorAll('h2').forEach(h2 => {
-  if (h2.textContent.includes('Acomodadores — Sábados')) {
-    const tables = h2.parentElement.querySelectorAll('table.pretty');
-    tables.forEach(table => {
-      const headerTh = table.querySelector('thead th[colspan]');
-      if (headerTh) {
-        const text = headerTh.textContent.trim();
-        let color = '', row1 = '', row2 = '';
-        if (text.includes('Octubre')) {
-          color = '#f59e0b'; row1 = '#fef3c7'; row2 = '#fffbeb';
-        } else if (text.includes('Noviembre')) {
-          color = '#9ca3af'; row1 = '#e5e7eb'; row2 = '#f3f4f6';
-        } else if (text.includes('Diciembre')) {
-          color = '#15803d'; row1 = '#dcfce7'; row2 = '#f0fdf4';
-        }
-        if (color) {
-          headerTh.style.background = color;
-          headerTh.style.color = '#fff';
-          const rows = table.querySelectorAll('tbody tr');
-          rows.forEach((tr, i) => {
-            tr.style.background = i % 2 === 0 ? row1 : row2;
-          });
-        }
-      }
-    });
-  }
-});
-
-// Reunión de fin de semana - pleca azul verdoso
-document.querySelectorAll('h2').forEach(h2 => {
-  if (h2.textContent.trim() === 'Reunión de fin de semana') {
-    const mainTable = h2.parentElement.querySelector('table.pretty');
-    if (mainTable) {
-      mainTable.querySelectorAll('thead th').forEach(th => {
-        th.style.background = '#3c7f8b';
-        th.style.color = '#fff';
-      });
-    }
-  }
-});
-</script>
-</body></html>
+</body>
+</html>
