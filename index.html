@@ -58,15 +58,23 @@ h1{margin:0 0 4px;font-size:24px}
 
 /* Escenario dinámico */
 .stage{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-top:20px;padding:10px}
-.view{display:none}
+.view{display:none;--thead-bg:#3c7f8b;--thead-fg:#fff}
 .view.active{display:block}
 
 /* Tablas */
 .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .pretty{width:100%;border-collapse:separate;border-spacing:0;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
 .pretty th,.pretty td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;font-size:14px}
-.pretty thead th{background:#f1f5fb;text-align:left;color:#1f2a44;font-weight:600}
+.pretty thead th{background:var(--thead-bg,#f1f5fb);text-align:left;color:var(--thead-fg,#1f2a44);font-weight:600}
 .pretty tbody tr:last-child td{border-bottom:none}
+
+/* Acomodadores trae estilos inline en <thead>; aquí los domamos sin afectar otras vistas */
+.view[data-view="acomodadores"] .pretty thead{background:var(--thead-bg) !important;color:var(--thead-fg) !important;}
+.view[data-view="acomodadores"] .pretty thead th{background:var(--thead-bg) !important;color:var(--thead-fg) !important;border:none !important;}
+
+/* Tema por vista (colores de encabezado de tabla) */
+.view[data-view="fds"]{--thead-bg:#3c7f8b;--thead-fg:#fff}
+
 
 /* --- ETIQUETAS (TAGS) --- */
 .tag {
@@ -145,6 +153,7 @@ textarea{min-height:120px;resize:vertical}
   margin-bottom: 22px;
   box-shadow: 0 3px 6px rgba(15,23,42,.12);
 }
+
 .section-es .tabla-mes h4 {
   margin: 0;
   padding: 10px 16px;
@@ -152,6 +161,7 @@ textarea{min-height:120px;resize:vertical}
   font-size: 16px;
   font-weight: 700;
 }
+  
 .section-es table.pretty-mes {
   width: 100%;
   border-collapse: collapse;
@@ -408,7 +418,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
   // ====== Colores “Reunión entre semana” ======
   function applyEntreSemanaHeaderColors(){
-    document.querySelectorAll('.section-es thead').forEach(thead => {
+    document.querySelectorAll('.view[data-view="es"] thead').forEach(thead => {
       const firstTh = thead.querySelector('th:first-child');
       if (!firstTh) return;
 
