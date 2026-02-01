@@ -282,7 +282,13 @@ document.addEventListener('DOMContentLoaded', function(){
     sec.dataset.loaded = '1';
 
     // hooks por bloque
-    if (view === 'es') applyEntreSemanaHeaderColors();
+    if (view === 'es') {
+      applyEntreSemanaHeaderColors();
+      filterFromCurrentWeekOnward(sec);
+    }
+    if (view === 'fds') {
+      filterFromCurrentWeekOnward(sec);
+    }
   }
 
   function show(view){
@@ -413,6 +419,44 @@ document.addEventListener('DOMContentLoaded', function(){
       } finally {
         if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalText || 'Enviar por correo'; }
       }
+    });
+  }
+
+
+  // ====== Filtro: mostrar desde la semana actual en adelante (Lunes→Domingo) ======
+  function startOfWeekMonday(d = new Date()) {
+    const date = new Date(d);
+    date.setHours(0,0,0,0);
+    const day = date.getDay(); // 0=Dom,1=Lun,...6=Sáb
+    const diff = (day === 0 ? -6 : 1 - day);
+    date.setDate(date.getDate() + diff);
+    return date;
+  }
+
+  function parseISODateLocal(iso) {
+    // iso: "YYYY-MM-DD"
+    const parts = (iso || '').split('-').map(Number);
+    if (parts.length !== 3 || parts.some(n => Number.isNaN(n))) return null;
+    const [y,m,d] = parts;
+    return new Date(y, m-1, d, 0,0,0,0);
+  }
+
+  function filterFromCurrentWeekOnward(rootEl) {
+    if (!rootEl) return;
+    const threshold = startOfWeekMonday(new Date());
+
+    // Entre semana: bloques completos
+    rootEl.querySelectorAll('.week-block[data-date]').forEach(block => {
+      const dt = parseISODateLocal(block.getAttribute('data-date'));
+      if (!dt) return;
+      block.style.display = (dt < threshold) ? 'none' : '';
+    });
+
+    // Fin de semana: filas
+    rootEl.querySelectorAll('tr[data-date]').forEach(row => {
+      const dt = parseISODateLocal(row.getAttribute('data-date'));
+      if (!dt) return;
+      row.style.display = (dt < threshold) ? 'none' : '';
     });
   }
 
