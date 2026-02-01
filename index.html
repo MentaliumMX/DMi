@@ -291,6 +291,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
     if (view === 'fds') {
       filterFromCurrentWeekOnward(sec);
+      splitFdsIntoTablesByMonth(sec);
     }
     if (view === 'notocar') {
       initNoTocarTerritorioFilter(sec);
@@ -463,6 +464,63 @@ document.addEventListener('DOMContentLoaded', function(){
       const dt = parseISODateLocal(row.getAttribute('data-date'));
       if (!dt) return;
       row.style.display = (dt < threshold) ? 'none' : '';
+    });
+  }
+
+  // ====== Fin de semana: separar la tabla por mes (una tabla por mes) ======
+  function splitFdsIntoTablesByMonth(rootEl){
+    if (!rootEl) return;
+    const table = rootEl.querySelector('#tablaFDS');
+    if (!table) return;
+
+    const thead = table.querySelector('thead');
+    const tbody = table.querySelector('tbody');
+    if (!thead || !tbody) return;
+
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    if (!rows.length) return;
+
+    // Agrupar por texto de la primera columna (Mes)
+    const groups = new Map();
+    rows.forEach(tr => {
+      const tds = tr.querySelectorAll('td');
+      if (!tds.length) return;
+      const mes = (tds[0].textContent || '').trim() || 'Sin mes';
+      if (!groups.has(mes)) groups.set(mes, []);
+      groups.get(mes).push(tr);
+    });
+
+    const wrap = table.closest('.table-wrap');
+    if (!wrap) return;
+    const parent = wrap.parentElement;
+    if (!parent) return;
+
+    // Evita ejecutar dos veces
+    if (parent.dataset.fdsSplit === '1') return;
+    parent.dataset.fdsSplit = '1';
+
+    // Quitar tabla original (para reemplazarla por tablas mensuales)
+    wrap.remove();
+
+    groups.forEach((trs, mes) => {
+      const tag = document.createElement('div');
+      tag.className = 'tag';
+      tag.textContent = mes;
+      parent.appendChild(tag);
+
+      const newWrap = document.createElement('div');
+      newWrap.className = 'table-wrap';
+
+      const newTable = document.createElement('table');
+      newTable.className = 'pretty';
+      newTable.appendChild(thead.cloneNode(true));
+
+      const newTbody = document.createElement('tbody');
+      trs.forEach(tr => newTbody.appendChild(tr)); // mueve filas
+      newTable.appendChild(newTbody);
+
+      newWrap.appendChild(newTable);
+      parent.appendChild(newWrap);
     });
   }
 
