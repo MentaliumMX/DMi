@@ -4,6 +4,7 @@
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Tablero DM — Modular</title>
+<link rel="icon" type="image/png" href="Tablero-DM.png"/>
 <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
 <link href="./Tablero DM_files/css2" rel="stylesheet"/>
 <style>
@@ -94,12 +95,14 @@ h1{margin:0 0 4px;font-size:24px}
 /* Botones y modal para “No Tocar” */
 .btn{background:#0ea5e9;border:1px solid #0793ce;color:#fff;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:600}
 .btn.ghost{background:#fff;color:#0b539b;border-color:#cfe6fb}
+.dm-select{min-width:200px;max-width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff;color:var(--ink);height:40px}
 .actions{display:flex;gap:10px;justify-content:flex-end;margin:8px 0 12px}
 .backdrop{position:fixed;inset:0;background:rgba(2,6,23,.42);display:none;align-items:center;justify-content:center;padding:16px;z-index:50}
 .modal{background:#fff;max-width:720px;width:100%;border:1px solid var(--line);border-radius:14px;padding:16px}
 .modal h3{margin:0 0 10px} .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 label{display:block;font-size:13px;color:#22314f;margin:8px 0 4px} input,textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}
 textarea{min-height:120px;resize:vertical}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
 .small{font-size:12px;color:#6b7280}
 
@@ -288,6 +291,9 @@ document.addEventListener('DOMContentLoaded', function(){
     }
     if (view === 'fds') {
       filterFromCurrentWeekOnward(sec);
+    }
+    if (view === 'notocar') {
+      initNoTocarTerritorioFilter(sec);
     }
   }
 
@@ -481,6 +487,59 @@ document.addEventListener('DOMContentLoaded', function(){
         });
       }
     });
+  }
+
+  // ====== Filtro por Territorio (NO TOCAR) ======
+  function initNoTocarTerritorioFilter(rootEl){
+    if (!rootEl) return;
+
+    const select = rootEl.querySelector('#territorioFilter');
+    const clearBtn = rootEl.querySelector('#clearTerritorioFilter');
+    const tbody = rootEl.querySelector('#noTocarBody');
+    if (!select || !tbody) return;
+
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+    // 1) Poblar opciones con territorios únicos
+    const territories = [...new Set(rows
+      .map(r => (r.children[0]?.textContent || '').trim())
+      .filter(Boolean)
+    )];
+
+    territories.sort((a,b) => {
+      const na = Number(a), nb = Number(b);
+      const aNum = !Number.isNaN(na), bNum = !Number.isNaN(nb);
+      if (aNum && bNum) return na - nb;
+      if (aNum) return -1;
+      if (bNum) return 1;
+      return a.localeCompare(b, 'es');
+    });
+
+    // Limpia (dejando el "Todos")
+    const keepFirst = select.querySelector('option[value="all"]');
+    select.innerHTML = '';
+    select.appendChild(keepFirst || new Option('Todos los territorios', 'all'));
+    territories.forEach(t => select.appendChild(new Option('Territorio ' + t, t)));
+
+    function applyFilter(value){
+      const v = (value || 'all').trim();
+      rows.forEach(r => {
+        const t = (r.children[0]?.textContent || '').trim();
+        r.style.display = (v === 'all' || t === v) ? '' : 'none';
+      });
+    }
+
+    // 2) Eventos
+    select.addEventListener('change', () => applyFilter(select.value));
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        select.value = 'all';
+        applyFilter('all');
+      });
+    }
+
+    // Estado inicial
+    applyFilter(select.value);
   }
 })();
 </script>

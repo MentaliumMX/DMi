@@ -1,53 +1,73 @@
-<h2>Direcciones «No Tocar» — Vista simple</h2>
+<h2>Casas que solicitaron «NO TOCAR»</h2>
 <p class="sub">Por favor, reporta cualquier incidente en la predicación.</p>
-<div class="actions" style="display:flex; justify-content:flex-start; margin-bottom:12px;">
-<button class="btn" id="openReport">Reportar nuevo incidente</button>
+<div class="actions" style="display:flex; justify-content:flex-start; margin-bottom:12px; align-items:center; gap:10px; flex-wrap:wrap;">
+  <button class="btn" id="openReport">Reportar nuevo incidente</button>
+
+  <label for="territorioFilter" class="sr-only">Filtrar por Territorio</label>
+  <select id="territorioFilter" class="dm-select" aria-label="Filtrar por Territorio">
+    <option value="all">Todos los territorios</option>
+  </select>
+
+  <button class="btn ghost" id="clearTerritorioFilter" type="button">Quitar filtro</button>
 </div>
 <div class="table-wrap">
 <table class="pretty">
-<thead><tr><th>Territorio</th><th>Calle / Depto.</th><th>Letra</th><th>Detalles</th><th>Número</th><th>Estado</th><th>Descripción evento</th><th>Responsable</th><th>Última revisión</th></tr></thead>
+<thead>
+    <tr>
+        <th>Territorio</th>
+        <th>Letra</th>
+        <th>Calle / Depto.</th>
+        <th>Número</th>
+        <th>Detalles</th>
+        <th>Descripción</th>
+        <th>Reportó</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+    </tr>
+</thead>
 <tbody id="noTocarBody">
-<tr><td>2</td><td>Seminario</td><td>A</td><td>Casa a media escalera.</td><td>1</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>2</td><td>Seminario</td><td>C</td><td>Casa verde a media escalera con un “9 3/4” en la puerta.</td><td>2</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>4</td><td>1a entrada</td><td>B</td><td>Casita de madera en la primera entrada del predio.</td><td>33</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>5</td><td>Entrada 15-17</td><td></td><td>Escalera de la entrada. Torres Quiroga.</td><td>201</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>5</td><td>Entrada 23</td><td></td><td>Entrada al lado del estacionamiento. Escalera del fondo. Torres Quiroga.</td><td>409</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>5</td><td>Entrada 23</td><td></td><td>Entrada al lado del estacionamiento. Escalera del fondo. Torres Quiroga.</td><td>411</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>6</td><td>Entrada 9-11</td><td></td><td>Escalera del fondo. Torres Quiroga.</td><td>11</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>7</td><td>Entrada 1-3</td><td></td><td>Escalera del fondo. Torres Quiroga.</td><td>111</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>7</td><td>Entrada 5-7</td><td></td><td>Escalera del fondo. Torres Quiroga.</td><td>11</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>7</td><td>Entrada 5-7</td><td></td><td>Escalera de la entrada. Torres Quiroga.</td><td>304</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>8</td><td>Oriente 157</td><td>D</td><td>Casa con puerta de madera.</td><td>3816</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>8</td><td>Norte 74</td><td>F</td><td>Casa color vino con portón blanco.</td><td>8011</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>9</td><td>Norte 72-B</td><td>C</td><td>Casa con puerta y portón negros.</td><td>8106</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>9</td><td>Oriente 157</td><td>F</td><td>Casa esquina Norte 72a. Casa verde con letrero de renta de autobuses.</td><td>3712</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>9</td><td>Norte 72</td><td>H</td><td>Casa color lila con portón negro y puerta de reja negra con tres troneras.</td><td>s/n</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>10</td><td>Oriente 159</td><td>G</td><td>Casa blanca con puerta negra.</td><td>3320</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>11</td><td>Norte 64-A</td><td>C</td><td>Casa naranja con puerta de madera.</td><td>7810</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>11</td><td>Norte 64-A</td><td>E</td><td>Casa color lila y portón blanco con ventanas de aluminio color oro.</td><td>7827</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>11</td><td>Oriente 155</td><td>F</td><td>Casa verde con letrero de “Natura”.</td><td>3316</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>11</td><td>Oriente 155</td><td>F</td><td>Casa verde con puertas blancas.</td><td>3324</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>11</td><td>Oriente 153</td><td>G</td><td>Casa color rojo con tejado en el portón, junto a las oficinas de la dirección distrital 04.</td><td>3404</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>12</td><td>Oriente 155</td><td>A</td><td>Casa de cemento con portón color cobre.</td><td>3404</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>12</td><td>Oriente 153</td><td>C</td><td>Casa amarilla en la esquina Norte 68.</td><td>3502</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>12</td><td>Norte 68</td><td>C</td><td>Casa blanca con cortina y portón blanco, con un pino enfrente, a lado de casa anaranjada.</td><td>7827</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>13</td><td>Norte 72</td><td>B</td><td>Casa rosa con portón café.</td><td>7810</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>14</td><td>Norte 74</td><td>A</td><td>Casa azul con portón blanco.</td><td>7807</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>14</td><td>Norte 74</td><td>A</td><td>Casa color café con azulejos pequeños café y verde, con portón blanco.</td><td>7821</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>14</td><td>Oriente 155</td><td>B</td><td>Casa gris, pared con acabado Tirol rústico, portón negro.</td><td>3804</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>14</td><td>Norte 74</td><td>B</td><td>*Probable 7913.* Casa amarillo ámbar con paredes deterioradas y portón blanco.</td><td>7913*</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>14</td><td>Norte 74-A</td><td>C</td><td>Casa blanca con portón café y adornos de alcatraz.</td><td>7805</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>15</td><td>Norte 76</td><td>A</td><td>Casa azul cielo con puerta blanca.</td><td>7727</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>15</td><td>Norte 76</td><td>B</td><td>Casa blanca de 2 pisos con farolas y portón oscuro.</td><td>7730</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>16</td><td>Gregorio Pairo</td><td>D</td><td>Casa esquina Félix Romero. Casa verde olivo con tienda de abarrotes.</td><td>15</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>17</td><td>Gabino Ortiz</td><td>A</td><td>Casa esquina Francisco Díaz. Casa color pistache y verde oscuro, portón blanco en la esquina.</td><td>14</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>20</td><td>Depto. 14</td><td></td><td>Unidad DM Nacional.</td><td>404</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>30</td><td>Valentín Canalizo</td><td>C</td><td>Casa blanca.</td><td>71</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>31</td><td>Calle sexta</td><td>B</td><td>Casa verde turquesa.</td><td>29</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>31</td><td>Artes</td><td>H</td><td>Casa de 2 pisos, mosaico café en la parte de abajo y durazno arriba. Portón negro.</td><td>s/n</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>31</td><td>Calle séptima</td><td>H</td><td>Casa anaranjada con rojo.</td><td>15</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>31</td><td>Calle novena</td><td>F</td><td>Casa blanca con portón negro.</td><td>14</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
-<tr><td>32</td><td>Capilla</td><td>A</td><td>Casa azul cielo con puerta verde.</td><td>s/n</td><td>🟥 No tocar</td><td></td><td></td><td></td></tr>
+<tr><td>2</td><td>A</td><td>Seminario</td><td>1</td><td>Casa a media escalera.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>2</td><td>C</td><td>Seminario</td><td>2</td><td>Casa verde a media escalera con un “9 3/4” en la puerta.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>4</td><td>B</td><td>1a entrada</td><td>33</td><td>Casita de madera en la primera entrada del predio.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>5</td><td></td><td>Entrada 15-17</td><td>201</td><td>Escalera de la entrada. Torres Quiroga.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>5</td><td></td><td>Entrada 23</td><td>409</td><td>Entrada al lado del estacionamiento. Escalera del fondo. Torres Quiroga.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>5</td><td></td><td>Entrada 23</td><td>411</td><td>Entrada al lado del estacionamiento. Escalera del fondo. Torres Quiroga.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>6</td><td></td><td>Entrada 9-11</td><td>11</td><td>Escalera del fondo. Torres Quiroga.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>7</td><td></td><td>Entrada 1-3</td><td>111</td><td>Escalera del fondo. Torres Quiroga.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>7</td><td></td><td>Entrada 5-7</td><td>11</td><td>Escalera del fondo. Torres Quiroga.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>7</td><td></td><td>Entrada 5-7</td><td>304</td><td>Escalera de la entrada. Torres Quiroga.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>8</td><td>D</td><td>Oriente 157</td><td>3816</td><td>Casa con puerta de madera.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>8</td><td>F</td><td>Norte 74</td><td>8011</td><td>Casa color vino con portón blanco.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>9</td><td>C</td><td>Norte 72-B</td><td>8106</td><td>Casa con puerta y portón negros.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>9</td><td>F</td><td>Oriente 157</td><td>3712</td><td>Casa esquina Norte 72a. Casa verde con letrero de renta de autobuses.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>9</td><td>H</td><td>Norte 72</td><td>s/n</td><td>Casa color lila con portón negro y puerta de reja negra con tres troneras.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>10</td><td>G</td><td>Oriente 159</td><td>3320</td><td>Casa blanca con puerta negra.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>11</td><td>C</td><td>Norte 64-A</td><td>7810</td><td>Casa naranja con puerta de madera.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>11</td><td>E</td><td>Norte 64-A</td><td>7827</td><td>Casa color lila y portón blanco con ventanas de aluminio color oro.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>11</td><td>F</td><td>Oriente 155</td><td>3316</td><td>Casa verde con letrero de “Natura”.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>11</td><td>F</td><td>Oriente 155</td><td>3324</td><td>Casa verde con puertas blancas.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>11</td><td>G</td><td>Oriente 153</td><td>3404</td><td>Casa color rojo con tejado en el portón, junto a las oficinas de la dirección distrital 04.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>12</td><td>A</td><td>Oriente 155</td><td>3404</td><td>Casa de cemento con portón color cobre.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>12</td><td>C</td><td>Oriente 153</td><td>3502</td><td>Casa amarilla en la esquina Norte 68.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>12</td><td>C</td><td>Norte 68</td><td>7827</td><td>Casa blanca con cortina y portón blanco, con un pino enfrente, a lado de casa anaranjada.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>13</td><td>B</td><td>Norte 72</td><td>7810</td><td>Casa rosa con portón café.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>14</td><td>A</td><td>Norte 74</td><td>7807</td><td>Casa azul con portón blanco.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>14</td><td>A</td><td>Norte 74</td><td>7821</td><td>Casa color café con azulejos pequeños café y verde, con portón blanco.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>14</td><td>B</td><td>Oriente 155</td><td>3804</td><td>Casa gris, pared con acabado Tirol rústico, portón negro.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>14</td><td>B</td><td>Norte 74</td><td>7913*</td><td>*Probable 7913.* Casa amarillo ámbar con paredes deterioradas y portón blanco.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>14</td><td>C</td><td>Norte 74-A</td><td>7805</td><td>Casa blanca con portón café y adornos de alcatraz.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>15</td><td>A</td><td>Norte 76</td><td>7727</td><td>Casa azul cielo con puerta blanca.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>15</td><td>B</td><td>Norte 76</td><td>7730</td><td>Casa blanca de 2 pisos con farolas y portón oscuro.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>16</td><td>D</td><td>Gregorio Pairo</td><td>15</td><td>Casa esquina Félix Romero. Casa verde olivo con tienda de abarrotes.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>17</td><td>A</td><td>Gabino Ortiz</td><td>14</td><td>Casa esquina Francisco Díaz. Casa color pistache y verde oscuro, portón blanco en la esquina.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>20</td><td></td><td>Depto. 14</td><td>404</td><td>Unidad DM Nacional.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>30</td><td>C</td><td>Valentín Canalizo</td><td>71</td><td>Casa blanca.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>31</td><td>C</td><td>Valentín Canalizo</td><td>112</td><td>Casa en Esquina con Artes</td><td>Señora pidió que ya no toquemos su puerta</td><td>Esteban</td><td>30/01/26</td><td>🟥</td></tr>
+<tr><td>31</td><td>B</td><td>Calle sexta</td><td>29</td><td>Casa verde turquesa.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>31</td><td>H</td><td>Artes</td><td>s/n</td><td>Casa de 2 pisos, mosaico café en la parte de abajo y durazno arriba. Portón negro.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>31</td><td>H</td><td>Calle séptima</td><td>15</td><td>Casa anaranjada con rojo.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>31</td><td>F</td><td>Calle novena</td><td>14</td><td>Casa blanca con portón negro.</td><td></td><td></td><td></td><td>🟥</td></tr>
+<tr><td>32</td><td>A</td><td>Capilla</td><td>s/n</td><td>Casa azul cielo con puerta verde.</td><td></td><td></td><td></td><td>🟥</td></tr>
 </tbody>
 </table>
 </div>
