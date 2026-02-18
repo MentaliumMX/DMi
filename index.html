@@ -268,6 +268,24 @@ document.addEventListener('DOMContentLoaded', function(){
     sec.classList.add('active');
   }
 
+  function runPostProcess(view, sec){
+    try{
+      if(view === "es"){
+        applyEntreSemanaHeaderColors();
+        filterFromCurrentWeekOnward(sec);
+      } else if(view === "fds"){
+        splitFdsIntoTablesByMonth(sec);
+        filterFromCurrentWeekOnward(sec);
+      } else if(view === "acomodadores"){
+        filterAcomodadoresFromCurrentWeekOnward(sec);
+      } else if(view === "notocar"){
+        initNoTocarTerritorioFilter(sec);
+      }
+    }catch(err){
+      console.warn("Post-process error:", view, err);
+    }
+  }
+
   async function loadView(view){
     const sec = document.querySelector('.view[data-view="'+view+'"]');
     if (!sec) return;
@@ -284,22 +302,14 @@ document.addEventListener('DOMContentLoaded', function(){
     sec.innerHTML = await res.text();
     sec.dataset.loaded = '1';
 
-    // hooks por bloque
-    if (view === 'es') {
-      applyEntreSemanaHeaderColors();
-      filterFromCurrentWeekOnward(sec);
-    }
-    if (view === 'fds') {
-      filterFromCurrentWeekOnward(sec);
-      splitFdsIntoTablesByMonth(sec);
-    }
-    if (view === 'notocar') {
-      initNoTocarTerritorioFilter(sec);
-    }
+    // post-procesos por bloque
+    runPostProcess(view, sec);
   }
 
   function show(view){
     setActive(view);
+    const _secNow = document.querySelector(".view[data-view=\""+view+"\"]");
+    if(_secNow && _secNow.dataset.loaded === "1"){ runPostProcess(view, _secNow); }
     loadView(view).catch(err => {
       const sec = document.querySelector('.view[data-view="'+view+'"]');
       if (sec) sec.innerHTML = '<p class="sub">Error: '+(err?.message || 'No se pudo cargar el bloque')+'</p>';
@@ -320,6 +330,17 @@ document.addEventListener('DOMContentLoaded', function(){
   const initial = (location.hash || '').replace('#','') || 'fds';
   show(initial);
 
+  // Si el navegador restaura la página desde cache (bfcache), re-aplicamos post-procesos
+  window.addEventListener("pageshow", (ev)=>{
+    if(ev && ev.persisted){
+      const active = document.querySelector(".view.active");
+      if(active){
+        const v = active.getAttribute("data-view");
+        if(v) runPostProcess(v, active);
+      }
+    }
+  });
+
   // Mantén el hash navegable (atrás/adelante)
   window.addEventListener('hashchange', () => {
     const view = (location.hash || '').replace('#','') || 'fds';
@@ -331,7 +352,7 @@ document.addEventListener('DOMContentLoaded', function(){
   document.addEventListener('click', (e) => {
     if (!bd) return;
 
-    const openBtn = e.target.closest('#openReport, #openReport2, [data-action="open-report"]');
+    const openBtn = e.target.closest('#openReport, [data-action="open-report"]');
     if (openBtn) {
       bd.style.display = 'flex';
       return;
@@ -521,6 +542,92 @@ document.addEventListener('DOMContentLoaded', function(){
 
       newWrap.appendChild(newTable);
       parent.appendChild(newWrap);
+    });
+  }
+
+
+  // ====== Acomodadores: filtrar desde semana actual (lunes) ======
+  function filterAcomodadoresFromCurrentWeekOnward(rootEl){
+    if(!rootEl) return;
+    const threshold = startOfWeekMonday(new Date());
+
+    const monthMap = {
+      "enero":0,"febrero":1,"marzo":2,"abril":3,"mayo":4,"junio":5,
+      "julio":6,"agosto":7,"septiembre":8,"setiembre":8,"octubre":9,"noviembre":10,"diciembre":11
+    };
+
+    const year = (new Date()).getFullYear();
+
+    // Caso A: estructura nueva (envoltorios .tabla-mes + h4)
+    const boxes = Array.from(rootEl.querySelectorAll(".tabla-mes"));
+    if(boxes.length){
+      boxes.forEach(box=>{
+        const monthTitle = ((box.querySelector("h4")||{}).textContent || "").trim().toLowerCase();
+        const monthIdx = monthMap[monthTitle];
+        const table = box.querySelector("table");
+        const rows = table ? Array.from(table.querySelectorAll("tbody tr")) : [];
+        let anyVisible = false;
+
+        rows.forEach(tr=>{
+          // Soporta data-date="YYYY-MM-DD" (más confiable)
+          const ds = (tr.getAttribute('data-date')||'').trim();
+          let dt = null;
+          if(ds){
+            dt = new Date(ds + 'T00:00:00');
+          } else {
+            const firstCell = (tr.children[0] ? tr.children[0].textContent : "").trim();
+            const m = firstCell.match(/(\d{1,2})/);
+            if(monthIdx == null || !m){
+              tr.style.display = "";
+              anyVisible = true;
+              return;
+            }
+            const day = Number(m[1]);
+            dt = new Date(year, monthIdx, day);
+          }
+          const show = dt && !isNaN(dt.getTime()) && dt >= threshold;
+          tr.style.display = show ? "" : "none";
+          if(show) anyVisible = true;
+        });
+
+        box.style.display = anyVisible ? "" : "none";
+      });
+      return;
+    }
+
+    // Caso B: estructura anterior (varias tablas .pretty por mes, título en thead th[colspan])
+    const tables = Array.from(rootEl.querySelectorAll('table.pretty'));
+    tables.forEach(table=>{
+      const monthTh = table.querySelector('thead th[colspan]');
+      const monthTitle = (monthTh ? monthTh.textContent : '').trim().toLowerCase();
+      const monthIdx = monthMap[monthTitle];
+      const rows = Array.from(table.querySelectorAll('tbody tr'));
+      let anyVisible = false;
+
+      rows.forEach(tr=>{
+        const ds = (tr.getAttribute('data-date')||'').trim();
+        let dt = null;
+        if(ds){
+          dt = new Date(ds + 'T00:00:00');
+        } else {
+          const firstCell = (tr.children[0] ? tr.children[0].textContent : '').trim();
+          const m = firstCell.match(/(\d{1,2})/);
+          if(monthIdx == null || !m){
+            tr.style.display = '';
+            anyVisible = true;
+            return;
+          }
+          const day = Number(m[1]);
+          dt = new Date(year, monthIdx, day);
+        }
+        const show = dt && !isNaN(dt.getTime()) && dt >= threshold;
+        tr.style.display = show ? '' : 'none';
+        if(show) anyVisible = true;
+      });
+
+      // Si una tabla queda vacía, la escondemos también
+      const wrap = table.closest('.table-wrap') || table;
+      wrap.style.display = anyVisible ? '' : 'none';
     });
   }
 
