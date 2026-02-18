@@ -271,7 +271,25 @@ document.addEventListener('DOMContentLoaded', function(){
   async function loadView(view){
     const sec = document.querySelector('.view[data-view="'+view+'"]');
     if (!sec) return;
-    if (sec.dataset.loaded === '1') return;
+    // Si ya está cargado, no vuelvas a hacer fetch, pero sí re-aplica hooks
+    if (sec.dataset.loaded === '1') {
+      if (view === 'es') {
+        applyEntreSemanaHeaderColors();
+        filterFromCurrentWeekOnward(sec);
+      }
+      if (view === 'fds') {
+        // Primero separa por mes, luego filtra por fecha
+        splitFdsIntoTablesByMonth(sec);
+        filterFromCurrentWeekOnward(sec);
+      }
+      if (view === 'acomodadores') {
+        initAcomodadoresWeekFilter(sec);
+      }
+      if (view === 'notocar') {
+        initNoTocarTerritorioFilter(sec);
+      }
+      return;
+    }
 
     const src = sec.dataset.src;
     if (!src) return;
@@ -284,14 +302,18 @@ document.addEventListener('DOMContentLoaded', function(){
     sec.innerHTML = await res.text();
     sec.dataset.loaded = '1';
 
-    // hooks por bloque
+    // hooks por bloque (IMPORTANTE: ejecutar DESPUÉS de inyectar el HTML)
     if (view === 'es') {
       applyEntreSemanaHeaderColors();
       filterFromCurrentWeekOnward(sec);
     }
     if (view === 'fds') {
-      filterFromCurrentWeekOnward(sec);
+      // Primero separa por mes, luego filtra por fecha
       splitFdsIntoTablesByMonth(sec);
+      filterFromCurrentWeekOnward(sec);
+    }
+    if (view === 'acomodadores') {
+      initAcomodadoresWeekFilter(sec);
     }
     if (view === 'notocar') {
       initNoTocarTerritorioFilter(sec);
@@ -464,6 +486,90 @@ document.addEventListener('DOMContentLoaded', function(){
       const dt = parseISODateLocal(row.getAttribute('data-date'));
       if (!dt) return;
       row.style.display = (dt < threshold) ? 'none' : '';
+    });
+  }
+
+  // ====== Acomodadores: mostrar desde la semana actual en adelante ======
+  // Reglas:
+  // - Toma como umbral el LUNES de la semana actual (00:00 local)
+  // - Muestra filas cuya fecha (mes + día) sea >= umbral
+  // - Oculta tablas mensuales que se queden sin filas visibles
+  function initAcomodadoresWeekFilter(rootEl){
+    if (!rootEl) return;
+
+    const threshold = startOfWeekMonday(new Date());
+    const year = new Date().getFullYear();
+
+    const monthMap = {
+      'ENERO': 0,
+      'FEBRERO': 1,
+      'MARZO': 2,
+      'ABRIL': 3,
+      'MAYO': 4,
+      'JUNIO': 5,
+      'JULIO': 6,
+      'AGOSTO': 7,
+      'SEPTIEMBRE': 8,
+      'SETIEMBRE': 8,
+      'OCTUBRE': 9,
+      'NOVIEMBRE': 10,
+      'DICIEMBRE': 11
+    };
+
+    // Cada mes normalmente es un table.pretty dentro de .table-wrap
+    const wraps = Array.from(rootEl.querySelectorAll('.table-wrap'));
+    wraps.forEach(wrap => {
+      const table = wrap.querySelector('table.pretty');
+      if (!table) return;
+
+      const thMonth = table.querySelector('thead th[colspan]');
+      const monthName = (thMonth?.textContent || '').trim().toUpperCase();
+      const monthIdx = monthMap[monthName];
+      if (monthIdx === undefined) {
+        // Si no detecta el mes, no rompe nada
+        return;
+      }
+
+      const rows = Array.from(table.querySelectorAll('tbody tr'));
+      let visibleCount = 0;
+
+      rows.forEach(tr => {
+        // Si ya hay data-date úsalo; si no, constrúyelo desde la celda "Fecha"
+        let iso = tr.getAttribute('data-date');
+        if (!iso) {
+          const firstTd = tr.querySelector('td');
+          const text = (firstTd?.textContent || '').trim();
+          const m = text.match(/\b(\d{1,2})\b/);
+          if (m) {
+            const dayNum = Number(m[1]);
+            const dt = new Date(year, monthIdx, dayNum, 0,0,0,0);
+            // Formatea a YYYY-MM-DD
+            const y = dt.getFullYear();
+            const mm = String(dt.getMonth()+1).padStart(2,'0');
+            const dd = String(dt.getDate()).padStart(2,'0');
+            iso = `${y}-${mm}-${dd}`;
+            tr.setAttribute('data-date', iso);
+          }
+        }
+
+        const dt = iso ? parseISODateLocal(iso) : null;
+        if (!dt) {
+          // Si no pudimos parsear, lo dejamos visible
+          tr.style.display = '';
+          visibleCount++;
+          return;
+        }
+
+        if (dt < threshold) {
+          tr.style.display = 'none';
+        } else {
+          tr.style.display = '';
+          visibleCount++;
+        }
+      });
+
+      // Oculta la tabla del mes si ya no tiene nada visible
+      wrap.style.display = (visibleCount === 0) ? 'none' : '';
     });
   }
 
