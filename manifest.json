@@ -1,0 +1,15 @@
+{
+  "name": "Tablero DM",
+  "short_name": "Tablero DM",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f6f8fc",
+  "theme_color": "#3c7f8b",
+  "icons": [
+    {
+      "src": "Tablero-DM.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

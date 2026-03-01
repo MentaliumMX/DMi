@@ -208,6 +208,9 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 </script>
 
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#3c7f8b">
+<link rel="icon" type="image/png" href="./Tablero-DM.png">
 </head>
 <body>
   <div class="container">
@@ -708,5 +711,20 @@ document.addEventListener('DOMContentLoaded', function(){
 })();
 </script>
 
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./service-worker.js").catch(console.error);
+    });
+    // If the page is restored from bfcache, re-check SW
+    window.addEventListener("pageshow", (e) => {
+      if (e.persisted) {
+        navigator.serviceWorker.getRegistration().then(reg => {
+          if (reg) reg.update();
+        });
+      }
+    });
+  }
+</script>
 </body>
 </html>
